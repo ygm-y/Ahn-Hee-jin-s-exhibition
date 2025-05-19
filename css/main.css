@@ -1,0 +1,1165 @@
+@import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');
+/* 전체선택자 */
+*{margin: 0;padding: 0;box-sizing: border-box;}
+/* 태그선택자 */
+li { list-style: none;}
+a { text-decoration: none;color: #111; display: block;
+    white-space: nowrap;font-family:"Noto Sans KR", sans-serif}
+body { font-family: "Noto Sans KR",sans-serif;}
+/* 브라우저에 가로 스크롤 생기지 않도록 함 */
+html,body { overflow-x: hidden;
+}
+/* 이미지의 크기는 부모요소의 크기에 맞춤 */
+img {width: 100%;}
+
+/* pc버전 */
+#wrap { width: 100%; margin: 0 auto;}
+/* header와 footer영역의 하위요소에 대한 스타일 지정 */
+.center-box {
+    width: 1600px;
+    margin: 0 auto;
+    /* center-box의 하위요소를 가로로 배치 */
+    display: flex;
+    /* 행기준, 줄바꿈 방지 */
+    flex-flow: row nowrap;
+    /* 하위요소를 양쪽으로 배치 */
+    justify-content: space-between;
+    /* 하위요소를 항상 세로 가운데 정렬 */
+    align-items: center;
+}
+/* section영역의 하위요소에 대한 스타일 지정 */
+.center-box2 {
+    width: 1400px;
+    margin: 0 auto;
+}
+header {
+    width: 100%;
+    height: 100px;
+    background-color: transparent;
+    /* 위치 고정 */
+    position: fixed;
+    top: 0; left: 0;
+    /* 항상 맨위에 배치 */
+    z-index: 100;
+}
+header .header-bg {
+    background-color: rgb(255,255,255,0.7);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: none;
+}
+header .center-box {
+    height: 100px;
+    /* .sub-bg 요소보다 앞에 배치되어야 함 z-index는 position과 함께 작성해야 함 */
+    position: relative;
+    z-index: 2;
+}
+/* 그룹 선택자 ()*/
+header .left-header , header .right-header {
+    display: flex;
+    /* align-items: center; */
+}
+header .logo {
+    /* rem단위: root element라는 뜻으로,root(브라우저)를 기준으로 크기를 설정함. ex) 1rem=16px
+    10.625rem=170px*/
+    /* rem이나 em은 상대크기임, px는 고정크기임 */
+    /* %는 부모요소를 기준으로 하는 상대크기임 */
+    width: 12rem;
+}
+header nav {
+    height: 30px;
+    margin-left: 3rem;
+}
+header nav .close {
+    display: none;
+}
+/* 주메뉴 - 자식 선택자(>) */
+header nav > ul {
+    display: flex;
+}
+/* li의 하위요소 .sub에 position:absolute 작성하면 그 기준은 li가 되어야 함 */
+header nav > ul >li {
+    position: relative;
+    padding: 0 3rem;
+}
+header nav > ul >li > a {
+    color: white;
+    font-size: 1.25rem;
+    /* 자식요소 :after의 위치는 a태그 기준이어야 함 */
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+header nav > ul > li > a span {
+    display: none;
+    width:1rem;
+}
+/* 서브메뉴 */
+header nav .sub {
+    display: none;
+    height: 260px;
+    overflow: hidden;
+    margin-top: 3rem;
+    position: absolute;
+}
+header nav .sub li a {
+    font-size: 1rem;
+    padding: 0.5rem 0.7rem;
+    position: relative;
+}
+/* 주메뉴에 마우스 오버하면 서브메뉴 내려옴 */
+
+/* header nav:has(> ul >li:hover) .sub {
+    height: 300px;
+} */
+
+/* 서브메뉴 배경 */
+header .sub-bg {
+    background-color: white;
+    /* .center-box영역과 겹침 */
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid #ddd;
+    display: none;
+    height: 260px;
+    overflow: hidden;
+    z-index: 1;
+    /* transition: height 0.5s ease-out; */
+}
+header .sub-bg a {
+    width: 24rem;
+    margin-left:60%;
+    margin-top: 1%;
+}
+/* 주메뉴에 마우스 오버하면 .sub-bg 내려옴 */
+
+/* header:has(nav > ul > li:hover) .sub-bg {
+    height: 300px;
+    border-top: 1px solid #999;
+} */
+
+/* 주메뉴에 마우스 오버하면 header의 배경색 내려옴 */
+header.active{
+    background-color: white;
+} 
+
+/* 주메뉴에 마우스 오버 하면 로고색 변경 - header에 active클레스 추가*/
+header.active .logo svg path{
+    fill: #111;
+}
+/* 화면이 스크롤될 때 로고색 변경 */
+header.active2 .logo svg path{
+    fill: #111;
+}
+/* 주메뉴에 마우스 오버하면 전체 주메뉴 글자색 변경 */ 
+header.active nav ul li a {
+    color: #111;
+}
+/* 화면이 스크롤되면 전체 주메뉴 글자색 변경 */
+header.active2 nav ul li a {
+    color: #111;
+}
+/* 주메뉴에 마우스 오버하면 밑줄 나오는 애니메이션 */
+header nav > ul > li > a::after {
+    content:"" ;
+    width: 0;
+    height: 3px;
+    background-color: #dd3558;
+    position: absolute;
+    bottom: -38px;
+    left: 50%;
+    transition: all 0.3s ease-out;
+}
+header nav > ul > li:hover > a:after {
+    width: 100%;
+    left: 0;
+}
+/* 서브메뉴에 마우스 오버했을 때 동그라미 나타나는 애니메이션 */
+header nav .sub li a::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius:50% ;
+    background-color: #dd3558;
+    position: absolute;
+    left: 0px;
+    top: 50%;
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: all 0.3s ease-out;
+}
+header nav .sub li a:hover {
+    color: #dd3558;
+}
+header nav .sub li a:hover:after {
+    left: 0;
+    opacity: 1;
+}
+header .right-header div {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin: 0 0.5rem;
+}
+header .right-header svg {
+    width: 100%;
+    height: 100%;
+}
+header .right-header svg path {
+    fill: white;
+}
+header .right-header .earth {
+    width: 2.5rem;
+}
+header .right-header svg circle,
+header .right-header svg line {
+    stroke: white;
+}
+/* 주메뉴에 마우스 오버하면 .right-header영역의 아이콘 색 변경 */
+header.active .right-header svg path {
+    fill:#111
+}
+/* 화면이 스크롤되면 .right-header영역의 아이콘색 변경 */
+header.active2 .right-header svg path {
+    fill:#111
+}
+header.active2 .right-header svg circle {
+    stroke: #111;
+}
+/* .menu 영역은 pc에서는 안보임 */
+header .right-header .menu {
+    display: none;
+}
+.s1 {
+    background-color: #111;
+    width: 100%;
+    /* 접속한 장치의 세로길이와 같게 설정 */
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+/* 그룹 선택자 (,) + 하위 선택자(띄어쓰기) */
+.s1 .slide, .s1 .slide div {
+    width: 100%;
+    height: 100%;
+}
+.s1 .slide div {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* .slide의 자식 요소 모두 겹침 */
+    position: absolute;
+    opacity: 0;
+    /* 서서히 나타나는 애니메이션 */
+    /* fade:(애니메이션 이름), 6s:실행시간(초), infinite(무한반복) */
+    animation: fade 9s infinite;
+}
+.s1 .slide .img1 {
+    background-image: url(../img/1.jpg);
+    /* 애니메이션 시작 전의 대기시간 */
+    animation-delay: 3s;
+}
+.s1 .slide .img2 {
+    background-image: url(../img/2.jpg);
+    animation-delay: 6s;
+}
+.s1 .slide .img3 {
+    background-image: url(../img/3.jpg);
+    animation-delay: 9s;
+}
+/* 애니메이션 설정,fade:이름 정의 */
+/* 10%,20% : frame  */
+@keyframes fade {
+    10% {opacity: 1;}
+    20% {opacity: 1;}
+    30% {opacity: 0;}
+    40% {
+        transform:scale(1);    }
+
+}
+/* 형제요소 .slide와 겹침 */
+.s1 .slide-txt {
+    position: absolute;
+    left: 200px;
+    bottom: 70px;
+    transform: translateX(-50%);
+    font-size: 1.9rem;
+    color: #111;
+}
+.s2 {
+    background-color: #fafaf9;
+}
+.s2 .slide-txt h2 {
+    font-size: 4rem;
+}
+.s2 {
+    padding-top: 10.625rem;        /* 170px */
+    padding-bottom: 12.5rem;      /* 200px */
+}
+.s2 h2 {
+    /* 글자와 hr 을 아래쪽에 배치 */
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 3.75rem;
+}
+.s2 h2 hr {
+    border: none;
+    background-color: #666;
+    width: 7.5rem;
+    height: 1px;
+    margin-left: 0.5rem;
+}
+.s2 p {
+    font-size: 1rem;
+}
+/* 클래스 선택자 (.) + 하위 선택자(띄어쓰기) */
+.s2 .acc {
+    width: 100%;
+    /* 최대 가로길이 */
+    max-width: 87.5rem;     /* 1400px */
+    height: 370px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.s2 .acc ul {
+    width: 100%;
+    height: 100%;
+    /* 행열로 li 자식요소를 배치함 */
+    display: table;
+    /* 고정된 테이블 배열 가능, 테이블의 가로길이와 세로길이에 의해 크기가 결정됨 */
+    table-layout: fixed;
+}
+.s2 .acc ul li {
+    display: table-cell;
+    /* li의 자식 요소를 아래쪽에 배치 */
+    /* vertical-align: bottom; */
+    /* li의 자식 요소들을 겹칠 때 기준은 li가 딤 */
+    position: relative;
+    width: 20%;
+    height: 100%;
+    background-position:center ;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* 모든 요소에 대해 0.5초동안 애니메이션(등속운동) */
+    transition: all 0.5s ease;
+}
+.s2 .acc ul li:first-child {
+    background-image: url(../img/미소.jpg);
+}
+.s2 .acc ul li:nth-child(2) {
+    background-image:url(../img/미소2.jpg);
+}
+.s2 .acc ul li:nth-child(3) {
+    background-image:url(../img/미소3.jpg);
+}
+.s2 .acc ul li:nth-child(4) {
+    background-image:url(../img/웃음이\ 가지는\ 의미의\ 모호함.jpg);
+}
+.s2 .acc ul li:last-child {
+    background-image:url(../img/308365608_1148638239070754_4973559804979357926_n.jpg);
+}
+.s2 .acc ul li div {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.s2 .acc ul li div a {
+    width: 100%;
+    height: 100%;
+    color: white;
+    /*  상하 안쪽여백:1rem,좌우 안쪽여백:1.5rem */
+    padding: 3rem 1.5rem;
+    /* 자식요소 h3와 p를 아래에 배치 */
+    display: flex;
+    flex-flow:column nowrap ;
+    justify-content: flex-end;
+    /* 모든 요소에 대해 0.2초 동안 애니메이션. ease(등속운동) */
+    transition: all 0.2s ease;
+}
+.s2 .acc ul li div a h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+    /* h3rk 위로 0.4초동안 애니메이션, ease(등속운동) */
+    transition: all 0.4s ease;
+    text-align: center;
+    transform: translateY(60%);
+    transition: transform 0.4s ease;
+    text-shadow: 0 0 5px rgba(0,0,0,0.6);
+
+}
+.s2 .acc ul li div a p {
+    font-size: 1rem;
+    opacity: 0;
+    /* 0.2초동안 대기했다가 0.4초동안 서서히 애니메이션, ease(등속운동) */
+    transition: opacity 0.4s 0.2s ease;
+}
+/* ul에 마우스 오버했을 때 li의 가로길이 설정 */
+.s2 .acc ul:hover li {
+    width: 7%;
+}
+/* li에 마우스 오버했을 때 가로길이 설정 */
+.s2 .acc ul li:hover {
+    width: 10%;
+}
+/* li에 마우스 오버했을 때 이미지가 어두워지는 효과 */
+/* .s2 .acc ul li:hover a {
+    background-color: rgba(0,0,0,0.5);
+} */
+.s2 .acc ul li:hover h3 {
+    transform: translateY(0);
+    text-align: left;
+}
+.s2 .acc ul li:hover p {
+    opacity: 1;
+}
+.s2 span {
+    font-size: 0.9rem;
+}
+.s3 {
+    padding-top: 5rem;        /* 80px */
+    padding-bottom: 5rem;      /* 80px */
+    background-color: #fafaf9;
+}
+.s3 h2 {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 3.75rem;
+}
+.s3 h2 hr {
+    border: none;
+    background-color: #666;
+    width: 7.5rem;
+    height: 1px;
+    margin-left: 0.5rem;
+}
+.s3 p {
+    font-size: 3rem;     /* 48px*/
+    margin-bottom: 3.75rem;
+}
+.s3 .banner ul {
+    display: flex;
+    flex-flow:row nowrap ;
+    gap: 1.25rem;
+}
+.s3 .banner ul li {
+    width: 33%;
+    height: 500px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.s3 .banner ul li:first-child {
+    background-image: url(../img/미소.jpg);
+}
+.s3 .banner ul li:nth-child(2) {
+    background-image: url(../img/73204877_699478510554835_4265510219693977777_n.jpg);
+}
+.s3 .banner ul li:last-child {
+    background-image: url(../img/372923096_1455977194986139_6542405101727785913_n.jpg);
+}
+.s3 .banner ul li a {
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-flow:column nowrap ;
+    justify-content: flex-end;
+    font-size: 2.7rem;
+    padding: 3rem;
+    /* 배경색이 0.3초동안 어두워지는 애니메이션 */
+    transition: background-color 0.3s;
+}
+.s3 .banner ul li p {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+.s4 {
+    padding-top:5rem ;  /* 80px*/
+    padding-bottom: 12.5rem;   /*200px*/
+    background-color: #f3f3f3;
+}
+.s4 h2 {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 0.75rem;
+}
+.s4 h2 hr {
+    border: none;
+    background-color: #666;
+    width: 7.5rem;
+    height: 1px;
+    margin-left: 0.5rem;
+}
+.s4 p {
+    margin-bottom: 3.75rem;
+}
+.s4 .swiper {
+    height: 500px;
+}
+.s4 .swiper .swiper-slide {
+    transform: translateY(35%);
+    height: 370px;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: transform 0.3s;
+    position: relative;
+}
+ .s4 .swiper .swiper-slide .rect {
+    width: 11.25rem;
+    height: 11.25rem;
+    position: absolute;
+    right: 0; top: 0;
+    color: white;
+    opacity: 0; 
+    /* 자식요소(글자)를 정가운데 배치 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} 
+.s4 .swiper .slide1 .rect {
+    background-color: #dd3558;
+}
+.s4 .swiper .slide2 .rect {
+    background-color: #dd3558;
+}
+.s4 .swiper .slide3 .rect {
+    background-color: #dd3558;
+}
+.s4 .swiper .slide4 .rect {
+    background-color: #dd3558;
+}
+.s4 .swiper .slide5 .rect {
+    background-color: #dd3558;
+} 
+ .s4 .swiper .swiper-slide .rect i {
+    width: 12px; 
+    /* 인라인 요소 -> 블록요소 */
+    display: block;
+    position: absolute;
+    top: 1.4rem;
+    right: 1.5rem;
+} 
+.s4 .swiper-slide .rect p {
+    font-style: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0;
+} 
+.s4 .swiper .swiper-slide-active {
+    transform: translateY(0);
+}
+ .s4 .swiper .swiper-slide-active .rect {
+    opacity: 1;
+} 
+.s4 .swiper .slide1 {
+    background-image: url(../img/swiper1.jpg);
+}
+.s4 .swiper .slide2 {
+    background-image: url(../img/swiper2.jpg);
+}
+.s4 .swiper .slide3 {
+    background-image: url(../img/swiper3.jpg);
+}
+.s4 .swiper .slide4 {
+    background-image: url(../img/457713926_1156443995654939_880561323835778552_n.jpg);
+}
+.s4 .swiper .slide5 {
+    background-image: url(../img/123456.jpg);
+}
+.s4 .swiper .swiper-button-prev {
+    width: 5.625rem;      /* 90px*/
+    height: 5.625rem;
+    left: 50%;
+    transform: translateX(-410%);
+    top: 160px;
+}
+/* swiper 슬라이드의 왼쪽버튼 디자인 수정(커스터마이징)*/
+.s4 .swiper .swiper-button-prev:after {
+    content: "";
+    background-image: url(../img/Frame\ 4.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 5.625rem;
+    height: 5.625rem;
+} 
+.s4 .swiper .swiper-button-next {
+    width: 5.625rem;      /* 90px*/
+    height: 5.625rem;
+    left: 50%;
+    transform: translateX(310%);
+    top: 160px;
+}
+/* swiper 슬라이드의 오른쪽버튼 디자인 수정(커스터마이징)*/
+.s4 .swiper .swiper-button-next:after {
+    content: "";
+    background-image: url(../img/Group\ 12.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 5.625rem;
+    height: 5.625rem;
+} 
+/* swiper 슬라이드의 페이지네이션 버튼 디자인 수정(커스터마이징)*/
+.s4 .swiper .swiper-pagination .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: #666;
+    margin: 1rem;
+    opacity: 1;
+}
+
+.s4 .swiper .swiper-pagination {
+    /* transform: translate3d(10%,-100%,0); */
+    position: relative;
+}
+.s4 .swiper .swiper-pagination .swiper-pagination-bullet-active {
+    position: relative;
+}
+.s4 .swiper .swiper-pagination .swiper-pagination-bullet-active:before {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border: 2px solid #545454;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.s4 .swiper .btns {
+    position: absolute;
+    left: 50%;
+    transform: translate3d(20%,-100%,0);
+    width: 15rem;
+    /* 자식요소 .swiper-pagination과 .play-pause를 갈로 배치 */
+    display: flex;
+    bottom: 15px;
+    z-index: 20;
+    cursor: pointer;
+}
+.s4 .swiper .btns .play-pause {
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+.s4 .swiper .btns .play-pause span {
+    position: absolute;
+    display: block;
+}
+.s4 .swiper .btns .play-pause .play {
+    display: none;
+}
+.s5 {
+    background-color: #ffffff;
+    padding-top:12.5rem ;
+    padding-bottom: 12.5rem;
+}
+.s5 .center-box {
+    flex-flow:column nowrap;
+}
+.s5 h1 {
+    font-size: 2.75rem;
+    text-align: center;
+}
+.s5 p {
+    font-size: 1.5rem;
+    margin-bottom: 3.75rem;
+    text-align: center;
+    padding-top: 5rem;
+}
+
+.s5 .s5-txt {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.s5 a {
+    padding: 1rem;
+    width: 341px;
+
+}
+.s5 a:hover {
+    background-color: white;
+    color: #111;
+}
+footer {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* padding-top: 7.5rem있어야 함 ; */
+    /* padding-bottom:7.5rem있어야함 ; */
+    background-color: #111;
+    color: white;
+    text-align: center;
+    padding-top:5rem ;
+    padding-bottom: 5rem;
+}
+footer .center-box {
+    flex-flow: column nowrap;
+    color: #cdcdcd;
+    font-size: 0.875rem;
+    align-items: center;
+}
+footer .center-box a {
+    color: #cdcdcd;
+    font-size: 0.875rem;
+}
+footer .up-footer {
+    width: 100%;
+    border-bottom: 1px solid rgb(255,255,255,0.2);
+    padding-bottom: 3.75rem;
+}
+footer .up-footer .sns {
+    width: 1.625rem;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+footer .up-footer .button {
+    width: 5rem;
+    margin: 0 auto;
+}
+footer .up-footer .info ul {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.25rem;
+
+    
+}
+footer .up-footer .info ul li {
+    /* 자식요소 : after와 글자(a태그)를 가로로 배치 */
+    display: flex;
+}
+footer .up-footer .info ul li:first-child a {
+    color: red;
+    display: flex;
+}
+footer .up-footer .info ul li:after {
+    content:"|";
+    margin-left:0.5rem;
+}
+/* 마지막 li의 :after 없앰 */
+footer .up-footer .info ul li:last-child:after {
+    content:"";
+}
+footer .up-footer address {
+    text-align: center;
+    font-style: normal;
+    line-height: 0.25rem;
+    margin-top: 0.5rem;
+}
+footer .dow-footer {
+    text-align: center;
+}
+footer .up-footer .sns ul li {
+    width: 1.2rem;
+}
+footer .up-footer .sns ul li img {
+    width: 100%;
+}
+footer .down-footer {
+
+    padding-top:3.125rem ;
+}
+/* li 마우스 오버하면 어두워짐 */
+.s3 .banner ul li:hover a {
+    background-color: rgb(0,0,0,0.4);
+}
+
+
+
+
+
+
+
+
+/* tablet버전 */
+@media screen and (max-width:1024px){
+   .center-box{
+    width: 90%;
+    margin: 0 auto;
+   }
+   header .logo {
+    width: 13rem;
+    }
+    header nav {
+        margin-left: 1.2rem;
+    }
+    header nav > ul > li {
+        padding: 0 2rem;
+    }
+    .center-box2{
+        width: 100%;
+        margin: 0 auto;
+    }
+    .s1 .slide-txt {
+        width: 90%;
+        bottom: 5%;
+        text-align: center;
+    }
+    .s2 .slide-txt h3 {
+        font-size: 6rem;
+    }
+    .s2 h2 {
+        font-size: 1.5rem;
+        margin-left: 50px;
+    }
+    .s2 P{
+        font-size: 3.5rem;
+    }
+    .s2 span {
+        font-size: 0.9rem;
+    }
+    .s3 h2 {
+        font-size: 1.5rem;
+        margin-left: 50px;
+    }
+    .s3 .banner ul li {
+        height: 400px;
+    }
+    .s3 .banner ul li a {
+        font-size: 1.5rem;
+    }
+    .s4 h2 {
+        font-size: 1.5rem;
+        margin-left: 50px;
+    }
+    .s4 p {
+        font-size: 1rem;
+        margin-left: 50px;
+    }
+    .s5 {
+        padding-top: 6rem;
+    }
+    .s5 h1 {
+        font-size: 2rem;
+    }
+    .s5 p {
+        font-size: 1.3rem;
+    }
+    footer {
+        padding-top: 3rem;
+    }
+    footer .up-footer address {
+        font-size: 0.6rem;
+    }
+    footer .up-footer .sns {
+    width: 3%;
+}
+footer .down-footer {
+    padding-top: 1rem;
+}
+}
+
+
+/* mobile버전 */
+@media screen and (max-width:480px){
+    header .logo {
+        width: 8rem;
+    }
+    header nav {
+        position: absolute;
+        right: -106%;
+        top: 0;
+        width: 90%;
+        height: 100vh;
+        background-color: white;
+        margin-left: 0;
+        padding: 3rem;
+
+        display: flex;
+        flex-flow:column nowrap;
+        align-items: flex-end;
+    }
+    header nav > ul {
+
+        width: 100%;
+
+        flex-flow:column nowrap;
+    }
+
+    /* 모바일 버전 내비게이션 주메뉴 */
+    header nav > ul > li {
+        padding:0;
+    }
+
+    /* 모바일버전에서는 주메뉴 오른쪽의 화살표 보임 */
+    header nav > ul > li > a > span {
+        display: block;
+        width:1.2rem;
+        transition: transform 0.3s ease;
+    }
+    /* 주메뉴를 클릭하면 화살표가 180도 회전 */
+    header nav > ul > li > a > span.active {
+        transform: rotate(180deg);
+    }
+    /* 모바일 버전에서는 주메뉴의 밑줄 표시안함 */
+    header nav > ul > li > a:after {
+        display: none;
+    }
+
+    /* 모바일 버전의 내비게이션 서브메뉴 */
+    header nav .sub {
+        position: relative;
+        margin-top: 0;
+        height:auto;
+    }
+    header nav .sub li a {
+        padding:0.7rem;
+    }
+    /* 모바일버전에서는 서브메뉴배경 안보임 */
+    header .sub-bg {
+        display: none;
+    }
+    header nav > ul > li > a {
+        color: #111;
+        padding: 1.5rem 0;
+        font-weight: bold;
+        text-align: left;
+    }
+    header .right-header .login {    /* 안 보임 */
+        display: none;
+    }
+    header .right-header .search {  /* 안 보임 */
+        display: none;
+    }
+    header .right-header .menu {    /* 보임 */
+        display: block;
+    }
+    /* 닫기버전은 mobile에서는 보임 */
+    header nav .close {
+        display: block;
+        width: 24px;
+        float: right;
+    }
+    /* 모바일버전에서는 서브메뉴배경 안 보임 */
+    header .sub-bg {
+        display: none;
+    }
+    header .nav-bg {
+        display: block;
+        margin-top: 3rem;
+    }
+    .center-box2 {
+        width: 90%;
+    }
+    .s1 {
+        height: 50vh;
+
+    }
+    .s1 .slide-txt h1 {
+        display: none;
+    }
+    .s2 {
+        padding-top: 5.375rem;
+        padding-bottom: 6rem;
+    }
+    .s2 .acc ul li div a .A1 h3 {
+    transform: translateY(0); /* 위치 초기화 */
+    margin-bottom: 0.5rem;   /* 약간의 여백 */
+    text-align: center;
+    }
+    .s2 .acc ul li div a {
+    justify-content: center; /* 텍스트 수직 정렬 중심으로 */
+    padding: 1rem 0.5rem;
+    }
+    .s2 h2 {
+    font-size:0.875rem;
+    }
+    .s2 h2 hr {
+        width: 4rem;
+        margin-left: 0;
+    }
+    .s2 p {
+        font-size: 2.5rem;
+        display: none;
+    }
+    .s2 span {
+        font-size: 0.8rem;
+        margin-bottom: 2.5rem;
+    }
+    .s2 .acc {
+        height: auto;
+    }
+    .s2 .acc ul {
+        display: flex;
+        /* 가로기준,줄바꿈 허용 */
+        flex-flow: row wrap;
+        height: unset;
+        /* pc버전에서 적용한 마우스 오버(:hovr) 해제 */
+        pointer-events: none;
+    }
+    .s2 .acc ul li {
+        width: 50%;
+        height: 30vh;
+    }
+    .s2 .acc ul li div a h3 {
+        font-size: 1.2rem;
+        padding-top: 4rem;
+    }
+    .s2 .acc ul li div a h4 {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+    .s2 .acc ul li div a h6 {
+        font-size: 1.2rem;
+    }
+    .s3 {
+        padding-top: 5.375rem;
+        padding-bottom: 6rem;
+    }
+    .s3 h2 {
+        font-size: 0.875rem;
+        margin-bottom: 2rem;
+    }
+    .s3 h2 hr {
+        width: 4rem;
+        margin-left: 0;
+    }
+    .s3 p {
+        font-size: 1.5rem;
+    }
+    .s3 .banner ul {
+        flex-flow:  row wrap;
+        gap: 0.5rem;
+    }
+    .s3 .banner ul li {
+        width: 49%;
+        height: 20vh;
+    }
+    .s3 .banner ul li:last-child {
+        width: 100%;
+    }
+        .s4 {
+        padding-top: 5.375rem;
+        padding-bottom: 4rem;
+    }
+    .s4 h2 {
+        font-size: 0.875rem;
+        margin-bottom: 2rem;
+    }
+    .s4 h2 hr {
+        width: 4rem;
+        margin-left: 0;
+    }
+    .s4 p {
+        font-size: 0.875rem;
+    }
+    .s4 .swiper {
+        width: 90%;
+        height: 24rem;
+        margin: 0 auto;
+    }
+    .s4 .swiper .swiper-slide {
+        height: 80%;
+        transform: translateY(0);
+    }
+    .s4 .swiper .swiper-button-prev {
+        width: 3.2rem;
+        height: 3.2rem;
+        left: 0;
+        transform: translateX(0);
+    }
+    .s4 .swiper .swiper-button-prev:after {
+        width: 3.2rem;
+        height: 3.2rem;
+    }
+    .s4 .swiper .swiper-button-next {
+        width: 3.2rem;
+        height: 3.2rem;
+        left: auto;
+        right: 0;
+        transform: translateX(0);
+    }
+    .s4 .swiper .swiper-button-next:after {
+        width: 3.2rem;
+        height: 3.2rem;
+    }
+    .s4 .swiper .btns {
+        transform: translate3d(-50%, -50%,0);
+        bottom: -5%;
+    }
+    .s4 .swiper .swiper-pagination .swiper-pagination-bullet {
+        width: 6px;
+        height: 6px;
+    }
+    .s4 .swiper .swiper-pagination .swiper-pagination-bullet-active:before {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #545454;
+    }
+    .s4 .swiper .btns .play-pause {
+        width: 20px;
+        height: 20px;
+    }
+    .s5 {
+        padding-top: 5.375rem;
+        padding-bottom:5.375rem;
+        width: 90%;
+        margin: 0 auto;
+        height: 450px;
+    }
+    .s5 h1 {
+        font-size: 0.806rem;
+        margin-bottom: 1.2rem;
+        text-align: center;
+    }
+    .s5 p {
+        font-size: 0.806rem;
+        padding-top: 2rem;
+    }
+    .s5 span {
+        display: none;
+    }
+    .s5 a {
+        margin: 0 auto;
+    }
+    footer {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+    footer .center-box{
+        width: 90%;
+    }
+    footer .center-box .up-footer {
+        flex-flow: column nowrap;
+        padding-bottom: 2rem;
+    }
+    footer .up-footer .info ul {
+        width: 70%;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+    }
+    footer address{
+        height: 4rem;
+        font-size: 0.6rem;
+    }
+    footer .up-footer address {
+        height: 4rem;
+        text-align: center;
+        letter-spacing: -1px;
+        font-size: 0.8rem;
+        line-height: 1.2rem;
+
+    }
+    footer .up-footer .family {
+        margin: 0 auto;
+        margin-top: 2rem;
+    }
+    footer .up-footer .sns ul {
+        justify-content: center;
+    }
+    footer .down-footer {
+        padding-top: 2rem;
+    }
+}
