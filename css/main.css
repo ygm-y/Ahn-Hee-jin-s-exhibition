@@ -1032,7 +1032,7 @@ footer .down-footer {
     .s3 .banner ul {
         flex-flow:  row wrap;
         justify-content:space-between ;
-        gap:1;
+        gap:0;
     }
     .s3 .banner ul li {
         width: 48%;
